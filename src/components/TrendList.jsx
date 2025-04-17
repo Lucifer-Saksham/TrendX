@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-// Fixed TrendList component - removed API dependency and simplified implementation
 function TrendList({ category }) {
   const [trends, setTrends] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Start loading
     setLoading(true);
     setError(null);
 
-    // Mock data for all trend categories
     const mockData = {
       "YouTube Trends": Array.from({ length: 10 }, (_, i) => ({
         id: `yt-${i}`,
@@ -39,18 +36,13 @@ function TrendList({ category }) {
       })),
     };
 
-    // Simulate API request with timeout
     const timer = setTimeout(() => {
-      // Use direct lookup without try/catch to simplify
       setTrends(mockData[category] || []);
       setLoading(false);
     }, 1000);
-
-    // Clean up timer on unmount
     return () => clearTimeout(timer);
   }, [category]);
 
-  // Show loading indicator
   if (loading) {
     return (
       <div className="trend-list-container">
@@ -63,7 +55,6 @@ function TrendList({ category }) {
     );
   }
 
-  // Show error if any
   if (error) {
     return (
       <div className="trend-list-container">
@@ -73,7 +64,6 @@ function TrendList({ category }) {
     );
   }
 
-  // Show trends
   return (
     <div className="trend-list-container">
       <h2 className="trend-category-title">{category}</h2>
