@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-function TrendList({ category, api }) {
+// Fixed TrendList component - removed API dependency and simplified implementation
+function TrendList({ category }) {
   const [trends, setTrends] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!api) return;
-
+    // Start loading
     setLoading(true);
     setError(null);
 
+    // Mock data for all trend categories
     const mockData = {
       "YouTube Trends": Array.from({ length: 10 }, (_, i) => ({
         id: `yt-${i}`,
@@ -38,32 +39,56 @@ function TrendList({ category, api }) {
       })),
     };
 
-    setTimeout(() => {
-      const categoryKey = category.split(" ")[0].toLowerCase();
-      const trendType = category.includes("YouTube")
-        ? "YouTube Trends"
-        : category.includes("Google")
-        ? "Google Trends"
-        : category.includes("Twitter")
-        ? "Twitter Trends"
-        : "News Trends";
+    // Simulate API request with timeout
+    const timer = setTimeout(() => {
+      try {
+        const trendType = category.includes("YouTube")
+          ? "YouTube Trends"
+          : category.includes("Google")
+          ? "Google Trends"
+          : category.includes("Twitter")
+          ? "Twitter Trends"
+          : "News Trends";
 
-      setTrends(mockData[trendType]);
-      setLoading(false);
+        setTrends(mockData[trendType]);
+        setLoading(false);
+      } catch (err) {
+        setError("Failed to load trends");
+        setLoading(false);
+      }
     }, 1000);
-  }, [api, category]);
 
-  return (
-    <div className="trend-list-container">
-      <h2 className="trend-category-title">{category}</h2>
-      {loading && (
+    // Clean up timer on unmount
+    return () => clearTimeout(timer);
+  }, [category]);
+
+  // Show loading indicator
+  if (loading) {
+    return (
+      <div className="trend-list-container">
+        <h2 className="trend-category-title">{category}</h2>
         <div className="loading-spinner">
           <div className="spinner"></div>
           <p>Loading {category}...</p>
         </div>
-      )}
-      {error && <p className="error">{error}</p>}
+      </div>
+    );
+  }
 
+  // Show error if any
+  if (error) {
+    return (
+      <div className="trend-list-container">
+        <h2 className="trend-category-title">{category}</h2>
+        <p className="error">{error}</p>
+      </div>
+    );
+  }
+
+  // Show trends
+  return (
+    <div className="trend-list-container">
+      <h2 className="trend-category-title">{category}</h2>
       <div className="trends-grid">
         {trends.map((trend, index) => (
           <div key={trend.id || index} className="trend-card">
