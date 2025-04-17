@@ -2,7 +2,6 @@ import React from "react";
 
 function Navbar({ onNavigate, currentSection }) {
   const scrollToContact = () => {
-    // Find the contact section by ID and scroll to it
     document.getElementById("contact-section").scrollIntoView({
       behavior: "smooth",
       block: "start",

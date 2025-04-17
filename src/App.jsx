@@ -11,16 +11,6 @@ function App() {
   const [currentSection, setCurrentSection] = useState("home");
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
-  const categories = {
-    "YouTube Trends":
-      "https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&regionCode=US&part=snippet&maxResults=10&key=YOUR_YOUTUBE_API_KEY",
-    "Google Trends":
-      "https://trends.google.com/trends/api/explore?hl=en-US&tz=360",
-    "Twitter Trends": "https://api.twitter.com/2/trends/place.json?id=1",
-    "News Trends":
-      "https://newsapi.org/v2/top-headlines?country=us&pageSize=10&apiKey=YOUR_NEWS_API_KEY",
-  };
-
   useEffect(() => {
     if (currentSection === "trending") {
       setSidebarVisible(true);
@@ -57,8 +47,6 @@ function App() {
               <TrendList category={category} api={categories[category]} />
             </div>
           )}
-
-          {/* Contact section is always visible as footer */}
           <div id="contact-section">
             <Contact />
           </div>

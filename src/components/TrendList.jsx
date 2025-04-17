@@ -11,7 +11,6 @@ function TrendList({ category, api }) {
     setLoading(true);
     setError(null);
 
-    // For development without API keys
     const mockData = {
       "YouTube Trends": Array.from({ length: 10 }, (_, i) => ({
         id: `yt-${i}`,
@@ -39,8 +38,6 @@ function TrendList({ category, api }) {
       })),
     };
 
-    // Actually make the API call when you have keys
-    // For now, use mock data for development
     setTimeout(() => {
       const categoryKey = category.split(" ")[0].toLowerCase();
       const trendType = category.includes("YouTube")
@@ -53,46 +50,7 @@ function TrendList({ category, api }) {
 
       setTrends(mockData[trendType]);
       setLoading(false);
-    }, 1000); // Simulate loading
-
-    // Uncomment this when you have API keys
-    /*
-    fetch(api)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch data");
-        return res.json();
-      })
-      .then((data) => {
-        // Process different API responses
-        let processedData = [];
-        
-        if (category === "YouTube Trends") {
-          processedData = data.items.map(item => ({
-            id: item.id,
-            title: item.snippet.title,
-            description: item.snippet.description,
-            thumbnail: item.snippet.thumbnails.medium.url
-          }));
-        } else if (category === "News Trends") {
-          processedData = data.articles.map((article, index) => ({
-            id: `news-${index}`,
-            title: article.title,
-            description: article.description,
-            thumbnail: article.urlToImage
-          }));
-        } else {
-          // Handle other APIs accordingly
-          processedData = data.items || [];
-        }
-        
-        setTrends(processedData);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-    */
+    }, 1000);
   }, [api, category]);
 
   return (

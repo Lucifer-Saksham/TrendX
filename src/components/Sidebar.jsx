@@ -11,7 +11,6 @@ function Sidebar({ category, setCategory, className }) {
   ];
 
   useEffect(() => {
-    // Animation effect when sidebar appears
     if (sidebarRef.current) {
       sidebarRef.current.style.transform = "translateX(0)";
     }

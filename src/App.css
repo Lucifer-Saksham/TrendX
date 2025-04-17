@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: Arial, sans-serif; */
+  font-family: Arial, sans-serif;
 }
 
 .app-container {
@@ -74,7 +74,7 @@
 /* Main Layout */
 .main {
   display: flex;
-  margin-top: 60px; /* Same as navbar height */
+  margin-top: 60px;
   min-height: calc(100vh - 60px);
 }
 
@@ -352,7 +352,7 @@
 
 /* Contact Section */
 #contact-section {
-  scroll-margin-top: 70px; /* Slightly more than navbar height */
+  scroll-margin-top: 70px;
 }
 .contact-section {
   background-color: #1a1a1a;
@@ -361,9 +361,8 @@
   text-align: center;
   width: 100%;
 }
-/* Add this to make sure the page has enough height for scrolling to work */
 .app-container {
-  min-height: 110vh; /* Make sure there's enough content for scrolling */
+  min-height: 110vh;
 }
 
 .contact-content {

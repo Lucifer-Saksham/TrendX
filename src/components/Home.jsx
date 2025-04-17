@@ -19,22 +19,17 @@ function Home({ onExplore }) {
         textElement.textContent = trendingWords[currentIndex];
         textElement.style.opacity = 0;
 
-        // Fade in
         let opacity = 0;
         const fadeIn = setInterval(() => {
           if (opacity >= 1) {
             clearInterval(fadeIn);
 
-            // Wait before fade out
             setTimeout(() => {
-              // Fade out
               let opacityOut = 1;
               const fadeOut = setInterval(() => {
                 if (opacityOut <= 0) {
                   clearInterval(fadeOut);
                   currentIndex = (currentIndex + 1) % trendingWords.length;
-
-                  // Start next word animation
                   setTimeout(animateTrendingWords, 500);
                 }
                 textElement.style.opacity = opacityOut;
@@ -51,7 +46,6 @@ function Home({ onExplore }) {
     animateTrendingWords();
 
     return () => {
-      // Clean up any potential intervals
       const intervals = window.setInterval(() => {}, 0);
       for (let i = 0; i < intervals; i++) {
         window.clearInterval(i);
