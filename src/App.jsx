@@ -44,7 +44,7 @@ function App() {
 
           {currentSection === "trending" && (
             <div className="trending-section">
-              <TrendList category={category} api={categories[category]} />
+              <TrendList category={category} />
             </div>
           )}
           <div id="contact-section">

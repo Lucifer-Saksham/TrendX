@@ -41,21 +41,9 @@ function TrendList({ category }) {
 
     // Simulate API request with timeout
     const timer = setTimeout(() => {
-      try {
-        const trendType = category.includes("YouTube")
-          ? "YouTube Trends"
-          : category.includes("Google")
-          ? "Google Trends"
-          : category.includes("Twitter")
-          ? "Twitter Trends"
-          : "News Trends";
-
-        setTrends(mockData[trendType]);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to load trends");
-        setLoading(false);
-      }
+      // Use direct lookup without try/catch to simplify
+      setTrends(mockData[category] || []);
+      setLoading(false);
     }, 1000);
 
     // Clean up timer on unmount
